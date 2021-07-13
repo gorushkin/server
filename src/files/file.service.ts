@@ -8,6 +8,12 @@ export const getFiles = async (): Promise<string[]> => {
   return files;
 };
 
+// export const getFile = async (filename: string): Promise<string> => {
+//   const pathToFile = getPathToFileBase(filename)
+//   const data = await fs.readFile(pathToFile);
+//   return 'file';
+// };
+
 export const addFile = async (file: UploadedFile): Promise<string> => {
   try {
     const { name, data } = file;
