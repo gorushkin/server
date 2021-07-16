@@ -5,14 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "node1": "PORT='4000' ts-node src/server.ts",
-    "node2": "PORT='5000' ts-node src/server.ts",
     "lint": "eslint --ext .js,.ts src/",
     "lint:fix": "eslint --ext .js,.ts --fix src/",
     "build": "tsc",
-    "dev": "nodemon",
-    "dev1": "PORT='4000' nodemon",
-    "dev2": "PORT='5000' nodemon"
+    "dev": "nodemon"
   },
   "author": "",
   "license": "ISC",
