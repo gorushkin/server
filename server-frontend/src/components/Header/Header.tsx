@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { getServerStatus } from '../../api';
+import HeaderItem from './HeaderItem';
+
+// TODO: Отстой этот Typography. Надо от него избавиться
+
+const routes = [
+  { href: '/', label: 'Server' },
+  { href: '/files', label: 'Files' },
+  { href: '/upload', label: 'Upload File' },
+];
 
 const Header = () => {
   const [serverStatus, setServerStatus] = useState('');
@@ -24,30 +29,9 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar variant="dense">
         <Grid container direction="row" alignItems="center">
-          <Link
-            color="inherit"
-            component={RouterLink}
-            className="header__link"
-            to="/"
-          >
-            <Typography color="initial">Server</Typography>
-          </Link>
-          <Link
-            color="inherit"
-            component={RouterLink}
-            className="header__link"
-            to="/files"
-          >
-            <Typography color="initial">Files</Typography>
-          </Link>
-          <Link
-            color="inherit"
-            component={RouterLink}
-            className="header__link"
-            to="/upload"
-          >
-            <Typography color="inherit">Upload File</Typography>
-          </Link>
+          {routes.map(({ label, href }, index) => (
+            <HeaderItem key={index} label={label} href={href} />
+          ))}
           <Typography className="header__status" variant="h6">
             {serverStatus}
           </Typography>
