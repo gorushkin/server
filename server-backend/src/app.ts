@@ -1,9 +1,10 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
-
+import cors from 'cors';
 import fileRouter from './files/file.router';
 
 const app = express();
+app.use(cors());
 
 app.use(fileUpload());
 app.use(express.json());
