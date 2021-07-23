@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const url = 'http://localhost:4000';
 
@@ -6,4 +6,12 @@ const instance = axios.create({
   baseURL: url,
 });
 
-export const getServerStatus = async () => instance.get('');
+const wrapper = (promise: any) =>
+  promise.catch((error: any) => {
+    console.log(error);
+    throw error;
+  });
+
+export const getServerStatus = () => wrapper(instance.get(''));
+
+export const getFilesList = () => wrapper(instance.get('/files'));
