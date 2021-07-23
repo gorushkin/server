@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+// import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -21,15 +24,30 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar variant="dense">
         <Grid container direction="row" alignItems="center">
-          <Typography className="header__title" variant="h6">
-            Server
-          </Typography>
-          <Button variant="contained" color="primary" href="#contained-buttons">
-            Files
-          </Button>
-          <Button variant="contained" color="primary" href="#contained-buttons">
-            UploadFile
-          </Button>
+          <Link
+            color="inherit"
+            component={RouterLink}
+            className="header__link"
+            to="/"
+          >
+            <Typography color="initial">Server</Typography>
+          </Link>
+          <Link
+            color="inherit"
+            component={RouterLink}
+            className="header__link"
+            to="/files"
+          >
+            <Typography color="initial">Files</Typography>
+          </Link>
+          <Link
+            color="inherit"
+            component={RouterLink}
+            className="header__link"
+            to="/upload"
+          >
+            <Typography color="inherit">Upload File</Typography>
+          </Link>
           <Typography className="header__status" variant="h6">
             {serverStatus}
           </Typography>

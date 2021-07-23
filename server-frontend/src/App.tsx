@@ -1,15 +1,19 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Main from './pages/Main';
+import Home from './pages/Home';
 import Files from './pages/Files';
+import UploadFile from './pages/UploadFile';
 
 const App = () => (
   <Router>
     <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
       <Route path="/files">
         <Files />
       </Route>
-      <Route path="/">
-        <Main />
+      <Route path="/upload">
+        <UploadFile />
       </Route>
     </Switch>
   </Router>
