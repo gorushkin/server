@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { NotificationContext } from '../components/Notification/NotificationContext';
 
 const url = 'http://localhost:4000';
 
@@ -10,6 +11,7 @@ const instance = axios.create({
 export const useFetch = (query) => {
   const [status, setStatus] = useState('idle');
   const [data, setData] = useState([]);
+  const { setTitle } = useContext(NotificationContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +22,7 @@ export const useFetch = (query) => {
         setStatus('fetched');
       } catch (error) {
         const ErrorMessage = error?.response?.data || 'something is broken';
-        console.log('ErrorMessage: ', ErrorMessage);
+        setTitle(ErrorMessage);
         throw error;
       }
     };
