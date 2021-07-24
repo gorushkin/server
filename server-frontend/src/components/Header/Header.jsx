@@ -3,7 +3,8 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
-import { getServerStatus } from '../../api';
+// import { getServerStatus } from '../../api';
+import { useFetch } from '../../api';
 import HeaderItem from './HeaderItem';
 
 const routes = [
@@ -14,14 +15,19 @@ const routes = [
 
 const Header = () => {
   const [serverStatus, setServerStatus] = useState('Server is down');
+  const { status, data } = useFetch('');
+
+  // useEffect(() => {
+  // const getInfo = async () => {
+  //   const { data } = await getServerStatus();
+  //   setServerStatus(data);
+  // };
+  // getInfo();
+  // }, []);
 
   useEffect(() => {
-    const getInfo = async () => {
-      const { data } = await getServerStatus();
-      setServerStatus(data);
-    };
-    getInfo();
-  }, []);
+    setServerStatus(data);
+  }, [status]);
 
   return (
     <AppBar position="static">
