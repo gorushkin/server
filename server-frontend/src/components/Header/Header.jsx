@@ -6,8 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import { getServerStatus } from '../../api';
 import HeaderItem from './HeaderItem';
 
-// TODO: Отстой этот Typography. Надо от него избавиться
-
 const routes = [
   { href: '/', label: 'Server' },
   { href: '/files', label: 'Files' },
@@ -15,7 +13,7 @@ const routes = [
 ];
 
 const Header = () => {
-  const [serverStatus, setServerStatus] = useState('');
+  const [serverStatus, setServerStatus] = useState('Server is down');
 
   useEffect(() => {
     const getInfo = async () => {

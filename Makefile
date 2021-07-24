@@ -3,3 +3,6 @@ back:
 
 front:
 	cd server-frontend; npm start
+
+front-lint:
+	cd server-frontend; npm run lint
