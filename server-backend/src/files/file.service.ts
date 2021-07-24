@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import { getPathToFileBase, checkIfUploadFolderExist } from '../helpers';
 
 export const getFiles = async (): Promise<string[]> => {
-    checkIfUploadFolderExist();
+  checkIfUploadFolderExist();
   const baseDir = getPathToFileBase();
   const files = await fs.readdir(baseDir);
   return files;

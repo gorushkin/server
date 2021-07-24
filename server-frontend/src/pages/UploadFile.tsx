@@ -4,9 +4,7 @@ import Layout from '../components/Layout/Layout';
 
 const UploadFile = () => (
   <Layout>
-    <Box>
-      <Typography variant="h2">Upload File</Typography>
-    </Box>
+    <Typography variant="h2">Upload File</Typography>
   </Layout>
 );
 

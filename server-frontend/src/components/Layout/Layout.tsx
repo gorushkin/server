@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
 import Header from '../Header/Header';
+import Notification from '../Notification/Notification.jsx';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => (
-  <Box>
-    <Header />
-    <Container className="container">
-      <>{children}</>
-    </Container>
-  </Box>
-);
+const Layout = ({ children }: LayoutProps) => {
+  const [show, setShow] = useState(true);
+
+  const handleClose = () => setShow(false);
+
+  return (
+    <>
+      <Notification show={show} handleClose={handleClose} />
+      <Header />
+      <Container className="container">
+        <>{children}</>
+      </Container>
+    </>
+  );
+};
 
 export default Layout;
