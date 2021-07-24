@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react';
-import { AxiosResponse } from 'axios';
 import Typography from '@material-ui/core/Typography';
 import Layout from '../components/Layout/Layout';
 import { getFilesList } from '../api';
 
 type File = string;
 
-// interface
-
 const Files = () => {
   const [files, setFiles] = useState<File[]>([]);
 
   useEffect(() => {
-    getFilesList().then(({ data }: File[]) => {
+    getFilesList().then(({ data }) => {
       setFiles(data.files);
     });
   }, []);

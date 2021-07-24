@@ -6,8 +6,10 @@ const instance = axios.create({
   baseURL: url,
 });
 
-const wrapper = (promise: any) =>
-  promise.catch((error: any) => {
+type promiseType = Promise<AxiosResponse<any>>;
+
+const wrapper = (promise: promiseType) =>
+  promise.catch((error) => {
     console.log(error);
     throw error;
   });
