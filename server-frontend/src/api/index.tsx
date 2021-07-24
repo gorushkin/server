@@ -10,7 +10,8 @@ type promiseType = Promise<AxiosResponse<any>>;
 
 const wrapper = (promise: promiseType) =>
   promise.catch((error) => {
-    console.log(error);
+    const ErrorMessage = error.response.data
+    console.log('ErrorMessage: ', ErrorMessage);
     throw error;
   });
 

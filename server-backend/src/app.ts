@@ -1,7 +1,8 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import fileRouter from './files/file.router';
+import { errorHandler } from './helpers';
 
 const app = express();
 app.use(cors());
@@ -18,5 +19,9 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/files', fileRouter);
+app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
+  errorHandler(err, res);
+  next();
+});
 
 export default app;

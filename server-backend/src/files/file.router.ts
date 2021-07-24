@@ -1,14 +1,17 @@
 import express, { RequestHandler } from 'express';
 import { UploadedFile } from 'express-fileupload';
 import { getPathToFileBase } from '../helpers';
-
 import * as filesService from './file.service';
 
 const router = express.Router();
 
-const getFiles: RequestHandler = async (_req, res) => {
-  const files = await filesService.getFiles();
-  res.json({ files });
+const getFiles: RequestHandler = async (_req, res, next) => {
+  try {
+    const files = await filesService.getFiles();
+    res.json({ files });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getFile: RequestHandler = async (req, res) => {
