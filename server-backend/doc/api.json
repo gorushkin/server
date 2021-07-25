@@ -1,0 +1,9 @@
+{
+  "info": {
+    "title": "Server",
+    "description": "Service for filesharing"
+  },
+  "servers": {
+    "url": "/"
+  }
+}

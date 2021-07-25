@@ -2,12 +2,14 @@ import path from 'path';
 import fs from 'fs';
 import { Response } from 'express';
 
-const BASE_DIR = path.join(process.cwd(), 'uploads');
+export const getPath = (str: string): string => path.join(process.cwd(), str);
+
+const BASE_DIR = getPath('uploads');
 
 export const checkIfUploadFolderExist = (): void => {
   const isFolderExist = fs.existsSync(BASE_DIR);
-  throw new Error('upload folder is not exist!!!');
   if (!isFolderExist) {
+    throw new Error('upload folder is not exist!!!');
   }
 };
 
