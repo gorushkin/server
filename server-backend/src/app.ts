@@ -1,14 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
-import fs from 'fs';
 import swaggerUI from 'swagger-ui-express';
+import yaml from 'yamljs';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import fileRouter from './files/file.router';
 import { errorHandler, getPath } from './helpers';
 
-const swaggerDocument = JSON.parse(
-  fs.readFileSync(getPath('doc/api.json'), 'utf-8')
-);
+const swaggerDocument = yaml.load(getPath('doc/api.yml'));
 
 const app = express();
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
