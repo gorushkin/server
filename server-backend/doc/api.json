@@ -1,9 +1,50 @@
 {
+  "openapi": "3.0.0",
   "info": {
     "title": "Server",
     "description": "Service for filesharing"
   },
-  "servers": {
-    "url": "/"
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "File": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/files": {
+      "get": {
+        "tags": ["Files"],
+        "summary": "Get all files",
+        "description": "Gets all users (remove password from response)",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/File"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect login or password"
+          }
+        }
+      }
+    }
   }
 }
