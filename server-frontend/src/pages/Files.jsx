@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import Layout from '../components/Layout/Layout';
-import { getFilesList } from '../api';
+import { getFilesList, url } from '../api';
 
 const Files = () => {
   const [files, setFiles] = useState([]);
@@ -15,7 +18,21 @@ const Files = () => {
   return (
     <Layout>
       <Typography variant="h2">Files</Typography>
-      <ul>{files && files.map((item, index) => <p key={index}>{item}</p>)}</ul>
+      <List>
+        {files &&
+          files.map((name, index) => (
+            <ListItem
+              key={index}
+              component={RouterLink}
+              button
+              to={`${url}/${name}`}
+              target="_blank"
+              download
+            >
+              {name}
+            </ListItem>
+          ))}
+      </List>
     </Layout>
   );
 };

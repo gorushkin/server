@@ -1,6 +1,6 @@
 import express, { RequestHandler } from 'express';
 import { UploadedFile } from 'express-fileupload';
-import { getPathToFileBase } from '../helpers';
+// import { getPathToFileBase } from '../helpers';
 import * as filesService from './file.service';
 
 const router = express.Router();
@@ -14,13 +14,13 @@ const getFiles: RequestHandler = async (_req, res, next) => {
   }
 };
 
-const getFile: RequestHandler = async (req, res) => {
-  const {
-    params: { filename },
-  } = req;
-  const pathToFile = getPathToFileBase(filename);
-  res.download(pathToFile);
-};
+// const getFile: RequestHandler = async (req, res) => {
+//   const {
+//     params: { filename },
+//   } = req;
+//   const pathToFile = getPathToFileBase(filename);
+//   res.download(pathToFile);
+// };
 
 const addFile: RequestHandler = async (req, res) => {
   if (req.files) {
@@ -33,7 +33,7 @@ const addFile: RequestHandler = async (req, res) => {
 };
 
 router.get('/', getFiles);
-router.get('/:filename', getFile);
+// router.get('/:filename', getFile);
 router.post('/', addFile);
 
 export default router;

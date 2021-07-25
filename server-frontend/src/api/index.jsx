@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import store, { actions } from '../store';
 
-const url = 'http://localhost:4000';
+export const url = 'http://localhost:4000';
 
 const instance = axios.create({
   baseURL: url,
@@ -33,10 +33,7 @@ export const useFetch = (query) => {
 
 const wrapper = (promise) =>
   promise.catch((error) => {
-    const ErrorMessage =
-      error.response.status === 500
-        ? 'server is down'
-        : error?.response?.data || 'something is broken';
+    const ErrorMessage = error?.response?.data || 'server is down';
     store.dispatch(actions.showAlert(ErrorMessage));
     throw error;
   });
@@ -44,3 +41,6 @@ const wrapper = (promise) =>
 export const getServerStatus = () => wrapper(instance.get(''));
 
 export const getFilesList = () => wrapper(instance.get('/files'));
+
+export const getFile = (filename) =>
+  wrapper(instance.get(`/files/${filename}`));
