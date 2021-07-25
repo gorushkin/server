@@ -3,13 +3,12 @@ import Typography from '@material-ui/core/Typography';
 import Layout from '../components/Layout/Layout';
 import { getFilesList } from '../api';
 
-
 const Files = () => {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
     getFilesList().then(({ data }) => {
-      setFiles(data.files);
+      setFiles(data);
     });
   }, []);
 

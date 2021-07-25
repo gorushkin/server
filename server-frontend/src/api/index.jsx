@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import { NotificationContext } from '../components/Notification/NotificationContext';
+import store, { actions } from '../store';
 
 const url = 'http://localhost:4000';
 
@@ -11,7 +11,6 @@ const instance = axios.create({
 export const useFetch = (query) => {
   const [status, setStatus] = useState('idle');
   const [data, setData] = useState([]);
-  const { setTitle } = useContext(NotificationContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +21,6 @@ export const useFetch = (query) => {
         setStatus('fetched');
       } catch (error) {
         const ErrorMessage = error?.response?.data || 'something is broken';
-        setTitle(ErrorMessage);
         throw error;
       }
     };
@@ -35,8 +33,11 @@ export const useFetch = (query) => {
 
 const wrapper = (promise) =>
   promise.catch((error) => {
-    const ErrorMessage = error?.response?.data || 'something is broken';
-    console.log('ErrorMessage: ', ErrorMessage);
+    const ErrorMessage =
+      error.response.status === 500
+        ? 'server is down'
+        : error?.response?.data || 'something is broken';
+    store.dispatch(actions.showAlert(ErrorMessage));
     throw error;
   });
 
