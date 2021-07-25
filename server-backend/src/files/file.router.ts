@@ -8,7 +8,8 @@ const router = express.Router();
 const getFiles: RequestHandler = async (_req, res, next) => {
   try {
     const files = await filesService.getFiles();
-    res.json({ files });
+    console.log(files);
+    res.json(files);
   } catch (error) {
     next(error);
   }

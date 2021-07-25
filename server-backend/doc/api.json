@@ -11,12 +11,10 @@
   ],
   "components": {
     "schemas": {
-      "File": {
-        "type": "object",
+      "Files": {
+        "type": "array",
         "properties": {
-          "name": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     }
@@ -26,7 +24,41 @@
       "get": {
         "tags": ["Files"],
         "summary": "Get all files",
-        "description": "Gets all users (remove password from response)",
+        "description": "Get all files",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Files"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something wrong"
+          }
+        }
+      }
+    },
+    "/files/{filename}": {
+      "get": {
+        "tags": ["Files"],
+        "summary": "Get file",
+        "description": "Gets file",
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -41,7 +73,7 @@
             }
           },
           "400": {
-            "description": "Incorrect login or password"
+            "description": "Something wrong"
           }
         }
       }
