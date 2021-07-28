@@ -44,3 +44,9 @@ export const getFilesList = () => wrapper(instance.get('/files'));
 
 export const getFile = (filename) =>
   wrapper(instance.get(`/files/${filename}`));
+
+export const sendFile = (data) => {
+  const formData = new FormData();
+  formData.append('file', data);
+  return instance.post('/files/', formData);
+};
