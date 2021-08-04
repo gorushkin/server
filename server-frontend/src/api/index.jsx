@@ -16,7 +16,7 @@ export const useFetch = (query) => {
     const fetchData = async () => {
       setStatus('fetching');
       try {
-        const response = await instance(queueMicrotask);
+        const response = await instance(query);
         setData(response.data);
         setStatus('fetched');
       } catch (error) {
@@ -38,7 +38,7 @@ const wrapper = (promise) =>
     throw error;
   });
 
-export const getServerStatus = () => wrapper(instance.get(''));
+// export const getServerStatus = () => wrapper(instance.get('/status'));
 
 export const getFilesList = () => wrapper(instance.get('/files'));
 

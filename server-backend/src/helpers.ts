@@ -3,8 +3,12 @@ import fs from 'fs';
 import { Response } from 'express';
 
 export const getPath = (str: string): string => path.join(process.cwd(), str);
+export const getPathNew = (array: string[]): string =>
+  path.join.apply(null, array);
 
 const BASE_DIR = getPath('uploads');
+
+export const FRONT_FOLDER = 'server-frontend/build';
 
 export const checkIfUploadFolderExist = (): void => {
   const isFolderExist = fs.existsSync(BASE_DIR);

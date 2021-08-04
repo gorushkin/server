@@ -15,7 +15,7 @@ const routes = [
 
 const Header = () => {
   const [serverStatus, setServerStatus] = useState('Server is down');
-  const { status, data } = useFetch('');
+  const { status, data } = useFetch('/status');
 
   // useEffect(() => {
   // const getInfo = async () => {
