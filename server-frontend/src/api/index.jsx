@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import store, { actions } from '../store';
-
-export const url = 'http://localhost:4000';
+import { config } from '../config/index';
 
 const instance = axios.create({
-  baseURL: url,
+  baseURL: `${config.ORIGIN}${config.API_BASE_URL}`,
 });
 
 export const useFetch = (query) => {
@@ -33,7 +32,7 @@ export const useFetch = (query) => {
 
 const wrapper = (promise) =>
   promise.catch((error) => {
-    const ErrorMessage = error?.response?.data || 'server is down';
+    const ErrorMessage = error?.response?.data.message || 'server is down';
     store.dispatch(actions.showAlert(ErrorMessage));
     throw error;
   });
