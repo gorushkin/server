@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import store, { actions } from '../store';
 import { config } from '../config/index';
 
+export const baseURL = `${config.ORIGIN}${config.API_BASE_URL}`;
+
 const instance = axios.create({
-  baseURL: `${config.ORIGIN}${config.API_BASE_URL}`,
+  baseURL,
 });
 
 export const useFetch = (query) => {
@@ -19,7 +21,8 @@ export const useFetch = (query) => {
         setData(response.data);
         setStatus('fetched');
       } catch (error) {
-        const ErrorMessage = error?.response?.data || 'something is broken';
+        const message = error?.response?.data.message || 'something is broken';
+        store.dispatch(actions.showAlert(message));
         throw error;
       }
     };
@@ -32,8 +35,8 @@ export const useFetch = (query) => {
 
 const wrapper = (promise) =>
   promise.catch((error) => {
-    const ErrorMessage = error?.response?.data.message || 'server is down';
-    store.dispatch(actions.showAlert(ErrorMessage));
+    const message = error?.response?.data.message || 'server is down';
+    store.dispatch(actions.showAlert(message));
     throw error;
   });
 

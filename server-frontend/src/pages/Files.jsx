@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import Layout from '../components/Layout/Layout';
-import { getFilesList, url, getFile } from '../api';
+import { getFilesList, baseURL, getFile } from '../api';
 
 const Files = () => {
   const [files, setFiles] = useState([]);
@@ -31,7 +31,7 @@ const Files = () => {
                 <ListItem key={index} button>
                   <a
                     rel="noreferrer"
-                    href={`${url}/file/${name}`}
+                    href={`${baseURL}/file/${name}`}
                     target="_blank"
                     download="asfasdfd"
                   >

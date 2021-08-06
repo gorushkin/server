@@ -18,7 +18,7 @@ const Notification = () => {
       }}
       open={!!alert.message}
       autoHideDuration={6000}
-      onClose={closeAlert}
+      onClose={() => closeAlert()}
       message={alert.message}
       action={
         <>
