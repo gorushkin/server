@@ -19,6 +19,7 @@ const UploadFile = () => {
 
   const sendFileHandler = async () => {
     await sendFile(file);
+    setFile(null);
   };
 
   return (
