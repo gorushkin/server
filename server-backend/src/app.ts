@@ -4,7 +4,13 @@ import yaml from 'yamljs';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import fileRouter from './files/file.router';
-import { errorHandler, getPath, getPathNew, FRONT_FOLDER } from './helpers';
+import {
+  errorHandler,
+  getPath,
+  getPathNew,
+  FRONT_FOLDER,
+  BASE_DIR_PATH,
+} from './helpers';
 
 const swaggerDocument = yaml.load(getPath('doc/api.yml'));
 
@@ -25,7 +31,7 @@ app.use('/status', (_req, res) => {
 });
 
 app.use('/files', fileRouter);
-app.use('/file', express.static('uploads'));
+app.use('/file', express.static(BASE_DIR_PATH));
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   errorHandler(err, res);
   next();
