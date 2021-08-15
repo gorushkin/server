@@ -2,7 +2,7 @@ back:
 	cd server-backend; npm run dev
 
 front:
-	cd server-frontend; npm start
+	cd server-frontend; npm run start:local
 
 back_install:
 	cd server-backend; npm i
