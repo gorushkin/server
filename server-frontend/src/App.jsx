@@ -1,22 +1,24 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Files from './pages/Files';
-import UploadFile from './pages/UploadFile';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getRoutes } from './routes';
 
-const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/files">
-        <Files />
-      </Route>
-      <Route path="/upload">
-        <UploadFile />
-      </Route>
-    </Switch>
-  </Router>
-);
+const App = () => {
+  const user = useSelector((state) => state.user);
+  const routes = getRoutes(user);
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        {routes.map((route) => (
+          <Route
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          />
+        ))}
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 export default App;

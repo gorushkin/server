@@ -44,7 +44,7 @@ const UploadFile = () => {
               ref={fileInput}
             />
           </Button>
-          <Typography variant="p">{file?.name}</Typography>
+          <p>{file?.name}</p>
         </Box>
         <Box>
           <Button
