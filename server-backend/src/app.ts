@@ -1,8 +1,14 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, {
+  Request,
+  Response,
+  NextFunction,
+  RequestHandler,
+} from 'express';
 import swaggerUI from 'swagger-ui-express';
 import yaml from 'yamljs';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
+import path from 'path';
 import fileRouter from './files/file.router';
 import {
   errorHandler,
@@ -24,6 +30,8 @@ const frontFolder = ['../', FRONT_FOLDER];
 
 const pathToFront = getPathNew(frontFolder);
 
+const pathToIndex = path.join(process.cwd(), pathToFront, 'index.html');
+
 app.use(express.static(pathToFront));
 
 app.use('/api/status', (_req, res) => {
@@ -36,5 +44,10 @@ app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   errorHandler(err, res);
   next();
 });
+
+const handler: RequestHandler = (_req, res) => res.sendFile(pathToIndex);
+
+app.use('/files', handler);
+app.use('/upload', handler);
 
 export default app;
