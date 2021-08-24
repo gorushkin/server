@@ -26,12 +26,12 @@ const pathToFront = getPathNew(frontFolder);
 
 app.use(express.static(pathToFront));
 
-app.use('/status', (_req, res) => {
+app.use('/api/status', (_req, res) => {
   res.send('Service is running!');
 });
 
-app.use('/files', fileRouter);
-app.use('/file', express.static(BASE_DIR_PATH));
+app.use('/api/files', fileRouter);
+app.use('/api/file', express.static(BASE_DIR_PATH));
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   errorHandler(err, res);
   next();
