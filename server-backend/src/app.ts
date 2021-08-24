@@ -15,8 +15,8 @@ import {
 const swaggerDocument = yaml.load(getPath('doc/api.yml'));
 
 const app = express();
-app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(cors());
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(fileUpload());
 app.use(express.json());
 
