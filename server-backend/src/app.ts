@@ -10,6 +10,7 @@ import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import path from 'path';
 import fileRouter from './files/file.router';
+import authRouter from './auth/auth.router';
 import {
   errorHandler,
   getPath,
@@ -38,7 +39,16 @@ app.use('/api/status', (_req, res) => {
   res.send('Service is running!');
 });
 
-app.use('/api/files', fileRouter);
+const auth: RequestHandler = (req, _res, next) => {
+  const { token } = req.body;
+  console.log('token: ', token);
+  if (token === '123456789') next();
+  throw new Error('Access denied');
+};
+
+app.use('/api/files', auth, fileRouter);
+app.use('/api/auth', authRouter);
+
 app.use('/api/file', express.static(BASE_DIR_PATH));
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   errorHandler(err, res);
