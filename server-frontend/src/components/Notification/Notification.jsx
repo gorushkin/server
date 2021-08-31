@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
 import { actions } from '../../store';
@@ -7,10 +7,18 @@ import { useAction } from '../../hooks/useAction';
 const Notification = () => {
   const { alert } = useSelector((state) => state);
   const closeAlert = useAction(actions.hideAlert);
-
+  const [toastTimeout, setToastTimeout] = useState('');
   const toastClassnames = cn('toast', {
     show: !!alert.message,
   });
+
+  useEffect(() => {
+    if (alert.message) {
+      const timeout = setTimeout(() => {
+        closeAlert();
+      }, 5000);
+    }
+  }, [alert]);
 
   return (
     <>
