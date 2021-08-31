@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isAuthorized: false,
+  isAuthorized: true,
   name: '',
 };
 

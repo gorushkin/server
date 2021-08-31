@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from '@material-ui/core/Grid';
 // import { getServerStatus } from '../../api';
 import { useFetch } from '../../api';
 import HeaderItem from './HeaderItem';
@@ -30,18 +26,20 @@ const Header = () => {
   }, [status]);
 
   return (
-    <AppBar position="static">
-      <Toolbar variant="dense">
-        <Grid container direction="row" alignItems="center">
-          {routes.map(({ label, href }, index) => (
-            <HeaderItem key={index} label={label} href={href} />
-          ))}
-          <Typography className="header__status" variant="h6">
-            {serverStatus}
-          </Typography>
-        </Grid>
-      </Toolbar>
-    </AppBar>
+    <header className="header">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div className="container-fluid">
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              {routes.map(({ label, href }, index) => (
+                <HeaderItem key={index} label={label} href={href} />
+              ))}
+            </ul>
+            <p className="header__status-text">{serverStatus}</p>
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 };
 
